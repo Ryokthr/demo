@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,5 +13,11 @@ public class AccountRestController {
 	public boolean createAccount() {
 		
 		return true;
+	}
+	
+	@DeleteMapping(value = "/delete")
+	public boolean deleteAccount() {
+		
+		return false;
 	}
 }
