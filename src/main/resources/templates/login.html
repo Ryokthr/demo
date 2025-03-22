@@ -2,29 +2,37 @@
 <html lang="ja">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
+  <div class="container-fluid mt-3">
+    <div class="row align-items-center justify-content-center">
+      <div class="col">
         <div th:if="${failureMessage != null}" th:text="${failureMessage}"></div>
-        <form th:action="@{/login}" method="post">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <td><input type="text" name="username"></td>
-                </tr>
-                <tr>
-                    <th>PASSWORD</th>
-                    <td><input type="password" name="password"></td>
-                </tr>
-            </table>
-            <input type="submit" value="ログイン">
+        <form action="@{/login}" method="post">
+          <div class="row mb-3">
+            <div class="col">
+              <label class="form-label" for="id">ID</label>
+              <input type="text" class="form-control" id="id">
+            </div>
+            <div class="col">
+              <label class="form-label" for="password">パスワード</label>
+              <input type="password" class="form-control" id="password">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <button type="submit" class="btn btn-primary">ログイン</button>
+            </div>
+          </div>
         </form>
+      </div>
     </div>
+  </div>
 </body>
 
 </html>
