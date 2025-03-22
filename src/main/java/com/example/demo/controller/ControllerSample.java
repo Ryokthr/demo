@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/v1/demo/hello")
+@RequestMapping(value = "/hello")
 public class ControllerSample {
-	
+
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public String hello() {
-		
+
 		return "Hello";
 	}
 }
