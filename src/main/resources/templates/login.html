@@ -12,16 +12,18 @@
   <div class="container-fluid mt-3">
     <div class="row align-items-center justify-content-center">
       <div class="col">
-        <div th:if="${failureMessage != null}" th:text="${failureMessage}"></div>
-        <form action="@{/login}" method="post">
+        <div class="mb-3" th:if="${failureMessage != null}" th:text="${failureMessage}"></div>
+        <form th:action="@{/login}" method="post">
           <div class="row mb-3">
-            <div class="col">
+            <div class="col-lg-3">
               <label class="form-label" for="id">ID</label>
-              <input type="text" class="form-control" id="id">
+              <input type="text" class="form-control" id="id" name="username">
             </div>
-            <div class="col">
+          </div>
+          <div class="row mb-3">
+            <div class="col-lg-3">
               <label class="form-label" for="password">パスワード</label>
-              <input type="password" class="form-control" id="password">
+              <input type="password" class="form-control" id="password" name="password">
             </div>
           </div>
           <div class="row mb-3">

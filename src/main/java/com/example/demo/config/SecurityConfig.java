@@ -24,6 +24,8 @@ public class SecurityConfig {
 					.hasRole("USER").anyRequest().permitAll();
 		}).formLogin((fromLogin) -> {
 			fromLogin.loginPage("/login").failureUrl("/login?failure").defaultSuccessUrl("/main").permitAll();
+		}).exceptionHandling((exceptionHandling) -> {
+			exceptionHandling.accessDeniedPage("/access-denied");
 		});
 
 		return http.build();
