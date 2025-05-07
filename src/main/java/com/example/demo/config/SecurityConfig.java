@@ -5,6 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -20,14 +24,26 @@ public class SecurityConfig {
 
 		http.authorizeHttpRequests((authorizeHttpRequests) -> {
 			authorizeHttpRequests.requestMatchers("/css/**", "/js/**", "/images/").permitAll()
-					.requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole("USER").requestMatchers("/**")
-					.hasRole("USER").anyRequest().permitAll();
+					.requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole("USER", "ADMIN").requestMatchers("/**")
+					.authenticated();
 		}).formLogin((fromLogin) -> {
-			fromLogin.loginPage("/login").failureUrl("/login?failure").defaultSuccessUrl("/main").permitAll();
+			fromLogin.loginPage("/login").failureUrl("/login?failure").defaultSuccessUrl("/").permitAll();
 		}).exceptionHandling((exceptionHandling) -> {
 			exceptionHandling.accessDeniedPage("/access-denied");
 		});
 
 		return http.build();
+	}
+
+	/**
+	 * TODO とりあえずInMemoryでdbに認証情報を格納したい。
+	 */
+	@Bean
+	public UserDetailsService userDetailsService() {
+
+		UserDetails member = User.builder().username("member").password("{noop}memberPassword").roles("USER").build();
+		UserDetails admin = User.builder().username("admin").password("{noop}adminPassword").roles("ADMIN").build();
+
+		return new InMemoryUserDetailsManager(member, admin);
 	}
 }

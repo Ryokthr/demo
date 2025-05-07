@@ -31,5 +31,9 @@ public class AuthPageController {
 	public String accessDenied() {
 		return ViewName.ACCESS_DENIED;
 	}
-
+	
+	@RequestMapping
+	public String afterLogin() {
+		return ViewName.MAIN;
+	}
 }

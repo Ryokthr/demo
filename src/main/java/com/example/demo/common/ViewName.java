@@ -10,4 +10,7 @@ public class ViewName {
 
 	/** アクセス拒否. */
 	public static final String ACCESS_DENIED = "access-denied";
+
+	/** メインページ */
+	public static final String MAIN = "main";
 }
