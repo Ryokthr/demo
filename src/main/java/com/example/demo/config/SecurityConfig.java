@@ -27,7 +27,7 @@ public class SecurityConfig {
 					.requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole("USER", "ADMIN").requestMatchers("/**")
 					.authenticated();
 		}).formLogin((fromLogin) -> {
-			fromLogin.loginPage("/login").failureUrl("/login?failure").defaultSuccessUrl("/").permitAll();
+			fromLogin.loginPage("/login").failureUrl("/login?failure").defaultSuccessUrl("/main", true).permitAll();
 		}).exceptionHandling((exceptionHandling) -> {
 			exceptionHandling.accessDeniedPage("/access-denied");
 		});
@@ -41,8 +41,8 @@ public class SecurityConfig {
 	@Bean
 	public UserDetailsService userDetailsService() {
 
-		UserDetails member = User.builder().username("member").password("{noop}memberPassword").roles("USER").build();
-		UserDetails admin = User.builder().username("admin").password("{noop}adminPassword").roles("ADMIN").build();
+		UserDetails member = User.builder().username("member").password("{noop}password").roles("USER").build();
+		UserDetails admin = User.builder().username("admin").password("{noop}password").roles("ADMIN").build();
 
 		return new InMemoryUserDetailsManager(member, admin);
 	}
